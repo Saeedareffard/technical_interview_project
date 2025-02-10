@@ -10,12 +10,20 @@ class AddressSearchRepositoryImpl extends BaseAddressSearchRepo {
   @override
   Future<List<AddressModel>> searchAddress(String address) async {
     if (address.isEmpty) return [];
-    final response = await _dio.get(
-      BaseAddressSearchRepo.apiUrl,
-      queryParameters: {'address': address},
-    );
-    return (response.data['addresses'] as List)
-        .map((e) => AddressModel.fromJson(e))
-        .toList();
+    try {
+      final response = await _dio.get(
+        BaseAddressSearchRepo.apiUrl,
+        queryParameters: {'address': address},
+      );
+      return (response.data['addresses'] as List)
+          .map((e) => AddressModel.fromJson(e))
+          .toList();
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        return [];
+      } else {
+        rethrow;
+      }
+    }
   }
 }

@@ -15,13 +15,18 @@ class LocationProductQualificationController
   Future<QualificationInfoModel> getProductsByLocationId(
       String locationId) async {
     state = const AsyncLoading();
-    final locationProductQualificationRepository =
-        ref.watch(locationProductQualificationRepositoryProvider);
-    final QualificationInfoModel qualificationInfoModel =
-        await locationProductQualificationRepository.getProductsByLocationId(
-      locationId,
-    );
-    state = AsyncValue.data(qualificationInfoModel);
-    return qualificationInfoModel;
+    try {
+      final locationProductQualificationRepository =
+          ref.watch(locationProductQualificationRepositoryProvider);
+      final QualificationInfoModel qualificationInfoModel =
+          await locationProductQualificationRepository.getProductsByLocationId(
+        locationId,
+      );
+      state = AsyncValue.data(qualificationInfoModel);
+      return qualificationInfoModel;
+    } on Exception catch (e, s) {
+      state = AsyncValue.error(e, s);
+      rethrow;
+    }
   }
 }

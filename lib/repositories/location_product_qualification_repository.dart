@@ -11,14 +11,18 @@ class LocationProductQualificationRepositoryImpl
   @override
   Future<QualificationInfoModel> getProductsByLocationId(
       String locationId) async {
-    final response = await _dio.get(
-      BaseLocationProductQualificationRepository.apiUrl,
-      queryParameters: {
-        'locationId': locationId,
-        'businessGroup': '2degrees',
-        'salesChannel': 'OnlineSignup'
-      },
-    );
-    return ProductVerifierFilter.verify(response.data);
+    try {
+      final response = await _dio.get(
+        BaseLocationProductQualificationRepository.apiUrl,
+        queryParameters: {
+          'locationId': locationId,
+          'businessGroup': '2degrees',
+          'salesChannel': 'OnlineSignup'
+        },
+      );
+      return ProductVerifierFilter.verify(response.data);
+    } on DioException {
+      rethrow;
+    }
   }
 }

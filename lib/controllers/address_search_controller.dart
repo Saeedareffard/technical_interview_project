@@ -16,13 +16,17 @@ class AddressSearchController extends _$AddressSearchController {
       const AddressSearchData(addresses: []);
 
   Future<void> searchAddress(String address) async {
-    final list =
-        await ref.read(addressSearchRepoProvider).searchAddress(address);
-    _allItems = list;
-    _pagination = Pagination(items: _allItems);
-    state = AsyncValue.data(
-      AddressSearchData(addresses: _pagination!.currentItems),
-    );
+    try {
+      final list =
+          await ref.read(addressSearchRepoProvider).searchAddress(address);
+      _allItems = list;
+      _pagination = Pagination(items: _allItems);
+      state = AsyncValue.data(
+        AddressSearchData(addresses: _pagination!.currentItems),
+      );
+    } catch (e, s) {
+      state = AsyncValue.error(e, s);
+    }
   }
 
   Future<void> loadNextPage() async {

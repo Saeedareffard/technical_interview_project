@@ -31,6 +31,18 @@ class ImagePlaceholder extends StatelessWidget {
             ),
           );
         },
+        loadingBuilder: (context, child, loadingProgress) {
+          return loadingProgress == null
+              ? child
+              : Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+        },
       ),
     );
   }
