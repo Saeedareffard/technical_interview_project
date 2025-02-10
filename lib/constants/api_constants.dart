@@ -3,4 +3,6 @@ class ApiConstants {
 
   ///this is handled on the front end side as the api does not support pagination
   static const int paginationSize = 11;
+  static const String businessGroup = '2degrees';
+  static const String salesChannel = 'OnlineSignup';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:technical_question/constants/api_constants.dart';
 import 'package:technical_question/controllers/location_product_qualification_controller.dart';
 import 'package:technical_question/screens/widgets/availability_chip.dart';
 import 'package:technical_question/screens/widgets/image_placeholder.dart';
@@ -53,9 +54,20 @@ class FiberQualificationPage extends HookConsumerWidget {
                       isAvailable:
                           qualification.fiber1000EnabledProducts.isNotEmpty,
                     ),
-                    Text(
-                      'Fiber 1000 Enabled Products',
-                      style: Theme.of(context).textTheme.titleLarge,
+                    Tooltip(
+                      triggerMode: TooltipTriggerMode.tap,
+                      message:
+                          'Business Group: ${ApiConstants.businessGroup}\nSales Channel: ${ApiConstants.salesChannel}',
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Fiber 1000 Enabled Products',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          Icon(Icons.info, color: Colors.blue[300])
+                        ],
+                      ),
                     ),
                     const Divider(),
                     qualification.fiber1000EnabledProducts.isEmpty
