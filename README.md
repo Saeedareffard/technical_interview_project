@@ -1,16 +1,19 @@
-# technical_question
 
-A new Flutter project.
+# Technical Test Project
 
-## Getting Started
+This project is developed with flutter 
 
-This project is a starting point for a Flutter application.
+The state management that is used in this project is riverpod_hooks
 
-A few resources to get you started if this is your first Flutter project:
+My Flutter Version is: [✓] Flutter (Channel stable, 3.24.5, on macOS 14.6 23G80 darwin-arm64, locale en-US)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Dart version: Dart SDK version: 3.5.4 (stable) (Wed Oct 16 16:18:51 2024 +0000) on "macos_arm64"
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Screenshots
+
+
+
+https://ibb.co/pBKZXtjc
+
+https://ibb.co/KxySLbcx
