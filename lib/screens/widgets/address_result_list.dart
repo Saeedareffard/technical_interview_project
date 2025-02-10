@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:technical_question/controllers/address_search_controller.dart';
+import 'package:technical_question/screens/fiber_qualification_page.dart';
+import 'package:technical_question/screens/widgets/empty_address_section.dart';
 import 'address_result_list_item.dart';
 
 class AddressResultList extends ConsumerStatefulWidget {
@@ -39,7 +41,7 @@ class _AddressResultListState extends ConsumerState<AddressResultList> {
     return state.when(
       data: (data) {
         if (data.addresses.isEmpty && !data.isLoadingMore) {
-          return const Center(child: Text('No addresses found'));
+          return const EmptyAddressSection();
         }
         return ListView.builder(
           controller: _scrollController,
@@ -48,7 +50,15 @@ class _AddressResultListState extends ConsumerState<AddressResultList> {
             if (index < data.addresses.length) {
               return AddressResultListItem(
                 address: data.addresses[index],
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => FiberQualificationPage(
+                        locationId: data.addresses[index].locationId,
+                      ),
+                    ),
+                  );
+                },
               );
             }
             return const Padding(
@@ -61,7 +71,7 @@ class _AddressResultListState extends ConsumerState<AddressResultList> {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, _) {
         if (error.toString().contains('404')) {
-          return const Center(child: Text('No addresses found'));
+          return const EmptyAddressSection();
         }
         return Center(child: Text('Error: $error'));
       },

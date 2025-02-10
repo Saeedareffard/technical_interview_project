@@ -9,6 +9,7 @@ class AddressSearchRepositoryImpl extends BaseAddressSearchRepo {
 
   @override
   Future<List<AddressModel>> searchAddress(String address) async {
+    if (address.isEmpty) return [];
     final response = await _dio.get(
       BaseAddressSearchRepo.apiUrl,
       queryParameters: {'address': address},
